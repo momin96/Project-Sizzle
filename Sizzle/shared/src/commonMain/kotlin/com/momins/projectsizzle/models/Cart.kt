@@ -1,6 +1,4 @@
 package com.momins.projectsizzle.models
-
-
 data class Cart(
     val items: MutableList<CartItem> = mutableListOf()
 ) {
@@ -33,11 +31,4 @@ data class Cart(
     fun clear() {
         items.clear()
     }
-}
-
-data class CartItem(
-    val item: MenuItem,
-    var quantity: Int = 1
-) {
-    val subtotal: Double get() = item.price * quantity
 }
