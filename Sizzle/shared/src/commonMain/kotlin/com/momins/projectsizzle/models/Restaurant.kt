@@ -8,5 +8,7 @@ data class Restaurant(
     val address: Address,
     val cuisines: List<Cuisine>,
     val rating: Double,
-    val reviews: List<Review>
+    val reviews: List<Review>,
+    var createAt: Int,
+    var updatedAt: Int
 )

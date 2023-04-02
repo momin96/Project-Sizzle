@@ -11,7 +11,7 @@ data class Cart(
         if (existing != null) {
             existing.quantity += quantity
         } else {
-            items.add(CartItem(item, quantity))
+            items.add(CartItem(item, quantity, item.createAt, item.updatedAt))
         }
     }
 

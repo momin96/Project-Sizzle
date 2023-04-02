@@ -5,5 +5,7 @@ data class Address(
     val city: String,
     val state: String,
     val country: String,
-    val pinCode: String
+    val pinCode: String,
+    var createAt: Int,
+    var updatedAt: Int
 )

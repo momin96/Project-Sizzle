@@ -6,5 +6,6 @@ data class Order(
     val userId: Int,
     val items: List<MenuItem>,
     val totalAmount: Double,
-    val timestamp: Long
+    var createAt: Int,
+    var updatedAt: Int
 )
