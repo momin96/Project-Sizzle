@@ -18,29 +18,38 @@ struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isValid: Bool = true
+    @State private var validator = LoginValidator()
 
     var body: some View {
         VStack {
-            TextField("Email", text: $email)
+            TextField(AppConstants().placeholderEmail, text: $email)
+                .onChange(of: email, perform: { newValue in
+                    validator.resetError()
+                    isValid = true
+                })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-            SecureField("Password", text: $password)
+            SecureField(AppConstants().placeholderPassword, text: $password)
+                .onChange(of: password, perform: { newValue in
+                    validator.resetError()
+                    isValid = true
+                })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-            Button("Sign In") {
-                isValid = validateForm()
+            
+            Button(AppConstants().buttonSignIn) {
+                isValid = validator.validate(email: email, password: password)
             }
             .padding()
-            .background(isValid ? Color.green : Color.red)
-            .foregroundColor(.white)
-            .cornerRadius(10)
+            
+            if !isValid {
+                validator.errorMessage.map {
+                    Text($0)
+                        .foregroundStyle(.red)
+                }
+            }
         }
         .padding()
-    }
-
-    func validateForm() -> Bool {
-        let validator = LoginValidator()
-        return validator.validateEmail(email: email) && validator.validatePassword(password: password)
     }
 }
 
